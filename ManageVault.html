@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Vault | Berry</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background-color: #7F7979; font-family: 'Inter', sans-serif; padding: 30px; color: #3D3B3C; }
+  
+  .nav-header { margin-bottom: 30px; }
+  .back-link { text-decoration: none; color: #ccc; font-size: 0.7rem; font-weight: 700; padding: 10px 18px; background: #3D3B3C; border-radius: 14px; border: 1px solid #ccc; text-transform: uppercase; }
+
+  h2 { font-size: 1.5rem; margin-top: 20px; }
+  p { font-size: 0.8rem; color: #ccc; margin-bottom: 40px; }
+
+  .manage-item { 
+    display: flex; align-items: center; justify-content: space-between; 
+    padding: 15px; border-bottom: 1px solid #ccc; transition: 0.2s;
+  }
+  .manage-item:hover { background: #7F7979; }
+
+  .item-details { display: flex; align-items: center; gap: 15px; }
+  .mini-preview { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; background: #7F7979; }
+  
+  .item-text .t { font-size: 0.9rem; font-weight: 600; }
+  .item-text .type { font-size: 0.6rem; text-transform: uppercase; color: #bbb; font-weight: 800; }
+
+  .actions { display: flex; gap: 10px; }
+  .del-btn { background: #fff; color: #ff4d4d; border: 1px solid #ff4d4d; padding: 6px 12px; border-radius: 8px; font-size: 0.6rem; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+  .del-btn:hover { background: #ccc; color: #fff; }
+
+  /* Reorder buttons (Simple version) */
+  .move-btn { background: #ccc; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+  <div class="nav-header">
+    <a href="ViewSubmission.html" class="back-link">← Back to View</a>
+  </div>
+  
+  <h2>Manage Vault Content</h2>
+  <p>Delete or rearrange your submissions below.</p>
+
+  <div id="manage-list">
+    <!-- Items load here -->
+  </div>
+
+<script>
+  function renderManager() {
+    const list = document.getElementById('manage-list');
+    const data = JSON.parse(localStorage.getItem('myUploads') || '[]');
+    list.innerHTML = data.length === 0 ? '<div style="color:#ccc">No items to manage.</div>' : '';
+
+    data.forEach((item, index) => {
+      const row = document.createElement('div');
+      row.className = 'manage-item';
+      row.innerHTML = `
+        <div class="item-details">
+          <img src="${item.image || ''}" class="mini-preview" onerror="this.style.display='none'">
+          <div class="item-text">
+            <div class="type">${item.type}</div>
+            <div class="t">${item.title}</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="move-btn" onclick="move(${index}, -1)">↑</button>
+          <button class="move-btn" onclick="move(${index}, 1)">↓</button>
+          <button class="del-btn" onclick="remove(${index})">Remove</button>
+        </div>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  function remove(index) {
+    if(confirm("Permanently delete this?")) {
+      let data = JSON.parse(localStorage.getItem('myUploads') || '[]');
+      data.splice(index, 1);
+      localStorage.setItem('myUploads', JSON.stringify(data));
+      renderManager();
+    }
+  }
+
+  function move(index, step) {
+    let data = JSON.parse(localStorage.getItem('myUploads') || '[]');
+    let newIndex = index + step;
+    if (newIndex >= 0 && newIndex < data.length) {
+      let temp = data[index];
+      data[index] = data[newIndex];
+      data[newIndex] = temp;
+      localStorage.setItem('myUploads', JSON.stringify(data));
+      renderManager();
+    }
+  }
+
+  window.onload = renderManager;
+</script>
+</body>
+</html>
