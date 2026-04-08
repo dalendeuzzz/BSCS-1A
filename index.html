@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berry | Portfolio</title>
+
+<style>
+  /* --- 1. GLOBAL SETTINGS --- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #7F7979;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    color: #333;
+  }
+
+  /* --- 2. SITE WRAPPER --- */
+  .site-wrapper {
+    width: 100%;
+    /* We keep the header/profile area centered and compact */
+    max-width: 1000px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Small container for the top profile info to keep it neat */
+  .profile-header {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* --- 3. TOP NAVIGATION --- */
+  .top-nav {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 50px;
+  }
+
+  .btn {
+    flex: 1; height: 48px; display: flex; align-items: center; justify-content: center;
+    text-decoration: none; border-radius: 16px; font-size: 0.85rem; font-weight: 600;
+    transition: all 0.3s ease; border: 1px solid #e1e8ed; background: #fff; color: #888;
+    cursor: pointer;
+  }
+
+  .btn-primary { background-color: #3D3B3C; color: #ffffff; border-color: #3D3B3C; }
+
+  /* --- 4. PROFILE SECTION --- */
+  .profile-image {
+    width: 150px; height: 150px; border-radius: 50%;
+    background-color: #fff; margin-bottom: 25px;
+    border: 1px solid #e1e8ed; background-size: cover; background-position: center;
+  }
+
+  .name { font-size: 1.8rem; font-weight: 800; color: #323031; margin-bottom: 4px; }
+  .info-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #aaa; margin-bottom: 25px; }
+
+  .details-box {
+    font-size: 0.95rem; color: #ccc; line-height: 1.6;
+    background: #3D3B3C; padding: 18px; border-radius: 24px;
+    width: 100%; border: 1px solid #e1e8ed; margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  }
+
+  /* --- 5. TOGGLEABLE HOBBY GRID (The "Vault" Style) --- */
+  .about-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    opacity: 0;
+  }
+
+  .about-section.active {
+    max-height: 5000px; 
+    margin-top: 40px;
+    opacity: 1;
+  }
+
+  .statement {
+    font-size: 1rem; color: #ccc; margin-bottom: 40px; font-weight: 500;
+  }
+
+  /* --- THE DYNAMIC GRID --- */
+  .hobby-grid {
+    display: grid;
+    /* Adjusts columns based on screen width: 250px minimum per item */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px; 
+    width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .hobby-item {
+    display: flex; 
+    flex-direction: column; 
+    text-decoration: none; 
+    color: inherit; 
+    width: 100%;
+    background: #3D3B3C;
+    padding: 12px;
+    border-radius: 32px;
+    border: 1px solid #e1e8ed;
+    transition: transform 0.3s ease;
+  }
+
+  .hobby-item:hover { transform: translateY(-5px); }
+
+  .hobby-pic {
+    width: 100%; 
+    aspect-ratio: 1 / 1;
+    background-color: #f9f9f9; 
+    border-radius: 24px;
+    background-size: cover; 
+    background-position: center;
+    /* Use 'contain' if you don't want the photo cropped, 
+       but 'cover' usually looks better for hobby stacks */
+    background-repeat: no-repeat;
+  }
+
+  .hobby-label {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+    color: #ccc; margin: 15px 0 5px 0; font-weight: 700;
+    text-align: center;
+  }
+
+  .external-icon::after { content: ' ↗'; font-size: 0.7rem; opacity: 0.4; }
+
+  /* --- 6. FOOTER --- */
+  .footer {
+    margin-top: 80px; padding: 40px;
+    font-size: 0.7rem; color: #ccc; letter-spacing: 4px; text-transform: uppercase;
+  }
+
+  /* Responsive tweaks for mobile */
+  @media (max-width: 600px) {
+    .hobby-grid {
+      grid-template-columns: 1fr; /* Force single column on very small phones */
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-wrapper">
+  
+  <div class="profile-header">
+    <nav class="top-nav">
+      <a href="dashboard.html" class="btn">DASHBOARD</a>
+      <button class="btn btn-primary" onclick="toggleAbout()">ABOUT ME</button>
+    </nav>
+
+    <div class="profile-image" style="background-image:url('pfp.jpeg');"></div>
+    
+    <h1 class="name">Dhylan Gil M. Salazar</h1>
+    <span class="info-tag">Student</span>
+
+    <div class="details-box">
+      Course & Section: <strong>BS Computer Science 1-A</strong><br>
+      Student ID: <strong>12345678</strong>
+    </div>
+  </div>
+
+  <!-- Toggleable Section -->
+  <div class="about-section" id="aboutSection">
+    
+    <p class="statement">
+      Silang Cavite, etc... add more
+    </p>
+
+    <!-- Switched from hobby-stack to hobby-grid -->
+    <div class="hobby-grid">
+      
+      <!-- Pickleball -->
+      <a href="https://www.facebook.com/YourPage" target="_blank" class="hobby-item">
+        <div class="hobby-pic" style="background-image:url('pickleball.jpeg');"></div>
+        <span class="hobby-label external-icon">Pickleball</span>
+      </a>
+
+      <!-- Gym -->
+      <div class="hobby-item">
+        <div class="hobby-pic" style="background-image:url('gym.jpeg');"></div>
+        <span class="hobby-label">Gym</span>
+      </div>
+
+      <!-- Cycling -->
+      <div class="hobby-item">
+        <div class="hobby-pic" style="background-image:url('cycling.jpeg');"></div>
+        <span class="hobby-label">Cycling</span>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    dalendeuzzz &copy; 2026
+  </footer>
+
+</div>
+
+<script>
+  function toggleAbout() {
+    const section = document.getElementById("aboutSection");
+    section.classList.toggle("active");
+    
+    if (section.classList.contains("active")) {
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    }
+  }
+</script>
+
+</body>
+</html>
+
