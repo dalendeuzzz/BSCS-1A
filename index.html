@@ -6,7 +6,6 @@
 <title>Berry | Portfolio</title>
 
 <style>
-  /* --- 1. GLOBAL SETTINGS --- */
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
@@ -23,7 +22,7 @@
   /* --- 2. SITE WRAPPER --- */
   .site-wrapper {
     width: 100%;
-    /* We keep the header/profile area centered and compact */
+
     max-width: 1000px; 
     display: flex;
     flex-direction: column;
@@ -31,7 +30,7 @@
     text-align: center;
   }
 
-  /* Small container for the top profile info to keep it neat */
+  
   .profile-header {
     max-width: 500px;
     width: 100%;
@@ -40,7 +39,7 @@
     align-items: center;
   }
 
-  /* --- 3. TOP NAVIGATION --- */
+
   .top-nav {
     width: 100%;
     display: flex;
@@ -57,7 +56,7 @@
 
   .btn-primary { background-color: #3D3B3C; color: #ffffff; border-color: #3D3B3C; }
 
-  /* --- 4. PROFILE SECTION --- */
+  
   .profile-image {
     width: 150px; height: 150px; border-radius: 50%;
     background-color: #fff; margin-bottom: 25px;
@@ -74,7 +73,6 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.02);
   }
 
-  /* --- 5. TOGGLEABLE HOBBY GRID (The "Vault" Style) --- */
   .about-section {
     max-height: 0;
     overflow: hidden;
@@ -93,7 +91,6 @@
     font-size: 1rem; color: #323031; margin-bottom: 40px; font-weight: 500;
   }
 
-  /* --- THE DYNAMIC GRID --- */
   .hobby-grid {
     display: grid;
     /* Adjusts columns based on screen width: 250px minimum per item */
@@ -125,8 +122,6 @@
     border-radius: 24px;
     background-size: cover; 
     background-position: center;
-    /* Use 'contain' if you don't want the photo cropped, 
-       but 'cover' usually looks better for hobby stacks */
     background-repeat: no-repeat;
   }
 
@@ -138,13 +133,11 @@
 
   .external-icon::after { content: ' ↗'; font-size: 0.7rem; opacity: 0.4; }
 
-  /* --- 6. FOOTER --- */
   .footer {
     margin-top: 80px; padding: 40px;
     font-size: 0.7rem; color: #ccc; letter-spacing: 4px; text-transform: uppercase;
   }
 
-  /* Responsive tweaks for mobile */
   @media (max-width: 600px) {
     .hobby-grid {
       grid-template-columns: 1fr; /* Force single column on very small phones */
@@ -173,7 +166,6 @@
     </div>
   </div>
 
-  <!-- Toggleable Section -->
   <div class="about-section" id="aboutSection">
     
     <p class="statement">
@@ -181,22 +173,18 @@
       I like to stay active whether it’s playing pickleball, lifting weights, or going on cycling rides.
     </p>
 
-    <!-- Switched from hobby-stack to hobby-grid -->
     <div class="hobby-grid">
-      
-      <!-- Pickleball -->
+ 
       <a href="https://www.facebook.com/share/14XwD6P7fjg/?mibextid=wwXIfr" target="_blank" class="hobby-item">
         <div class="hobby-pic" style="background-image:url('dalendeuzzz/pickleball.jpeg');"></div>
         <span class="hobby-label external-icon">Pickleball</span>
       </a>
 
-      <!-- Gym -->
       <div class="hobby-item">
         <div class="hobby-pic" style="background-image:url('dalendeuzzz/gym.jpeg');"></div>
         <span class="hobby-label">Gym</span>
       </div>
 
-      <!-- Cycling -->
       <div class="hobby-item">
         <div class="hobby-pic" style="background-image:url('dalendeuzzz/cycling.jpeg');"></div>
         <span class="hobby-label">Cycling</span>
