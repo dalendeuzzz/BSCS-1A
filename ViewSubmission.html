@@ -75,14 +75,13 @@
   </div>
 
 <script>
-  // 1. HARD-CODED DATA (Visible to everyone on GitHub)
-  // Edit this list to add your actual files from your 'uploads' folder
+  
   const hardCodedData = [
     {
-      title: "",
-      type: "",
+      title: "Quiz 1",
+      type: "Quiz",
       fileName: "",
-      image: "" // Path to your file in GitHub
+      image: "quiz1.jpg"
     },
     {
       title: "",
@@ -131,8 +130,8 @@
         };
         
         card.innerHTML = `
-          <div class="Quiz 1">${item.title}</div>
-          <div class="quiz1.jpg">File: ${item.fileName}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-filename">File: ${item.fileName}</div>
           <div class="preview-box">
             ${item.image ? `<img src="${item.image}" class="preview-img">` : 'No Preview'}
           </div>
