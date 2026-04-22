@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Quiz</title>
+    <title>Upload Exam</title>
     <style>
         * { 
             box-sizing: border-box; 
@@ -19,7 +19,7 @@
             padding: 40px 20px;
         }
 
-        .form-container {
+        .exam-upload-container {
             width: 100%;
             max-width: 450px;
             background: #3D3B3C;
@@ -29,7 +29,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.02);
         }
 
-        h2 { 
+        .exam-page-title { 
             font-size: 1.3rem;
             margin-bottom: 30px; 
             text-align: center;
@@ -37,11 +37,11 @@
             letter-spacing: 1px;
         }
 
-        .form-group {
+        .exam-input-group {
             margin-bottom: 22px;
         }
 
-        label { 
+        .exam-label { 
             display: block;
             font-size: 0.7rem;
             font-weight: 700; 
@@ -51,7 +51,7 @@
             letter-spacing: 1px;
         }
 
-        input[type="text"] { 
+        .exam-text-input { 
             width: 100%; 
             padding: 15px;
             border-radius: 14px;
@@ -60,14 +60,14 @@
             font-size: 0.9rem;
         }
 
-        input[type="file"] { 
+        .exam-file-input { 
             width: 100%; 
             font-size: 0.8rem;
             color: #C1BDB3; 
             padding: 10px 0;
         }
 
-        .submit-btn {
+        .exam-submit-btn {
             width: 100%; 
             padding: 18px; 
             border: none; 
@@ -80,7 +80,7 @@
             font-size: 0.9rem;
         }
 
-        .reset-btn {
+        .exam-reset-btn {
             width: 100%; 
             background: none;
             border: 1px solid #7F7979;
@@ -95,13 +95,13 @@
             transition: 0.2s;
         }
 
-        .reset-btn:hover { 
+        .exam-reset-btn:hover { 
             background: #fafafa; 
             color: #3D3B3C; 
             border-color: #ccc; 
         }
 
-        .back-btn { 
+        .exam-cancel-btn { 
             display: block; 
             text-align: center; 
             margin-top: 25px;
@@ -115,30 +115,30 @@
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>MAJOR EXAM UPLOAD</h2>
+    <div class="exam-upload-container">
+        <h2 class="exam-page-title">MAJOR EXAM UPLOAD</h2>
         
         <form id="uploadForm">
-            <div class="form-group">
-                <label for="title">Exam Title</label>
-                <input type="text" id="title" placeholder="e.g., Finals" required>
+            <div class="exam-input-group">
+                <label class="exam-label" for="title">Exam Title</label>
+                <input class="exam-text-input" type="text" id="title" placeholder="e.g., Finals" required>
             </div>
 
-            <div class="form-group">
-                <label for="mainFile">Exam File</label>
-                <input type="file" id="mainFile">
+            <div class="exam-input-group">
+                <label class="exam-label" for="mainFile">Exam File</label>
+                <input class="exam-file-input" type="file" id="mainFile">
             </div>
 
-            <div class="form-group">
-                <label for="proofImage">Proof Image</label>
-                <input type="file" id="proofImage" accept="image/*">
+            <div class="exam-input-group">
+                <label class="exam-label" for="proofImage">Proof Image</label>
+                <input class="exam-file-input" type="file" id="proofImage" accept="image/*">
             </div>
 
-            <button type="submit" class="submit-btn">UPLOAD EXAM</button>
-            <button type="button" class="reset-btn" onclick="clearForm()">Clear Selection</button>
+            <button type="submit" class="exam-submit-btn">UPLOAD EXAM</button>
+            <button type="button" class="exam-reset-btn" onclick="clearForm()">Clear Selection</button>
         </form>
 
-        <a href="Dashboard.html" class="back-btn">← Cancel</a>
+        <a href="Dashboard.html" class="exam-cancel-btn">← Cancel</a>
     </div>
 
     <script>
@@ -182,7 +182,7 @@
                 localStorage.setItem('myUploads', JSON.stringify(currentUploads));
                 
                 alert('Exam Uploaded!');
-                window.location.href = 'view-ubmission.html';
+                window.location.href = 'view-submission.html';
             }
         };
     </script>
