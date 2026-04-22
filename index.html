@@ -1,217 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salazar | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salazar | Portfolio</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #7F7979;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            color: #333;
+        }
 
-  body {
-    background-color: #7F7979;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    padding: 40px 20px;
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    color: #333;
-  }
+        .portfolio-site-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-  /* --- 2. SITE WRAPPER --- */
-  .site-wrapper {
-    width: 100%;
+        .portfolio-profile-header {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    max-width: 1000px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+        .portfolio-top-nav {
+            width: 100%;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
 
-  
-  .profile-header {
-    max-width: 500px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+        .portfolio-nav-btn {
+            flex: 1;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid #e1e8ed;
+            background: #fff;
+            color: #888;
+            cursor: pointer;
+        }
 
+        .portfolio-nav-btn-primary {
+            background-color: #3D3B3C;
+            color: #ffffff;
+            border-color: #3D3B3C;
+        }
 
-  .top-nav {
-    width: 100%;
-    display: flex;
-    gap: 12px;
-    margin-bottom: 50px;
-  }
+        .portfolio-profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #fff;
+            margin-bottom: 25px;
+            border: 1px solid #e1e8ed;
+            background-size: cover;
+            background-position: center;
+        }
 
-  .btn {
-    flex: 1; height: 48px; display: flex; align-items: center; justify-content: center;
-    text-decoration: none; border-radius: 16px; font-size: 0.85rem; font-weight: 600;
-    transition: all 0.3s ease; border: 1px solid #e1e8ed; background: #fff; color: #888;
-    cursor: pointer;
-  }
+        .portfolio-name-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #323031;
+            margin-bottom: 4px;
+        }
 
-  .btn-primary { background-color: #3D3B3C; color: #ffffff; border-color: #3D3B3C; }
+        .portfolio-info-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #C1BDB3;
+            margin-bottom: 25px;
+        }
 
-  
-  .profile-image {
-    width: 150px; height: 150px; border-radius: 50%;
-    background-color: #fff; margin-bottom: 25px;
-    border: 1px solid #e1e8ed; background-size: cover; background-position: center;
-  }
+        .portfolio-details-card {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.6;
+            background: #3D3B3C;
+            padding: 18px;
+            border-radius: 24px;
+            width: 100%;
+            border: 1px solid #CCC;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
 
-  .name { font-size: 1.8rem; font-weight: 800; color: #323031; margin-bottom: 4px; }
-  .info-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #C1BDB3; margin-bottom: 25px; }
+        .portfolio-about-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            opacity: 0;
+        }
 
-  .details-box {
-    font-size: 0.95rem; color: #ccc; line-height: 1.6;
-    background: #3D3B3C; padding: 18px; border-radius: 24px;
-    width: 100%; border: 1px solid #CCC; margin-bottom: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-  }
+        .portfolio-about-section.active {
+            max-height: 5000px;
+            margin-top: 40px;
+            opacity: 1;
+        }
 
-  .about-section {
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 100%;
-    opacity: 0;
-  }
+        .portfolio-bio-statement {
+            font-size: 1rem;
+            color: #323031;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
 
-  .about-section.active {
-    max-height: 5000px; 
-    margin-top: 40px;
-    opacity: 1;
-  }
+        .portfolio-hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            padding-bottom: 20px;
+        }
 
-  .statement {
-    font-size: 1rem; color: #323031; margin-bottom: 40px; font-weight: 500;
-  }
+        .portfolio-hobby-item {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            background: #3D3B3C;
+            padding: 12px;
+            border-radius: 32px;
+            border: 1px solid #e1e8ed;
+            transition: transform 0.3s ease;
+        }
 
-  .hobby-grid {
-    display: grid;
-    /* Adjusts columns based on screen width: 250px minimum per item */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px; 
-    width: 100%;
-    padding-bottom: 20px;
-  }
+        .portfolio-hobby-item:hover {
+            transform: translateY(-5px);
+        }
 
-  .hobby-item {
-    display: flex; 
-    flex-direction: column; 
-    text-decoration: none; 
-    color: inherit; 
-    width: 100%;
-    background: #3D3B3C;
-    padding: 12px;
-    border-radius: 32px;
-    border: 1px solid #e1e8ed;
-    transition: transform 0.3s ease;
-  }
+        .portfolio-hobby-pic {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #f9f9f9;
+            border-radius: 24px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-  .hobby-item:hover { transform: translateY(-5px); }
+        .portfolio-hobby-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ccc;
+            margin: 15px 0 5px 0;
+            font-weight: 700;
+            text-align: center;
+        }
 
-  .hobby-pic {
-    width: 100%; 
-    aspect-ratio: 1 / 1;
-    background-color: #f9f9f9; 
-    border-radius: 24px;
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+        .portfolio-external-icon::after {
+            content: ' ↗';
+            font-size: 0.7rem;
+            opacity: 0.4;
+        }
 
-  .hobby-label {
-    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
-    color: #ccc; margin: 15px 0 5px 0; font-weight: 700;
-    text-align: center;
-  }
+        .portfolio-site-footer {
+            margin-top: 80px;
+            padding: 40px;
+            font-size: 0.7rem;
+            color: #ccc;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
 
-  .external-icon::after { content: ' ↗'; font-size: 0.7rem; opacity: 0.4; }
-
-  .footer {
-    margin-top: 80px; padding: 40px;
-    font-size: 0.7rem; color: #ccc; letter-spacing: 4px; text-transform: uppercase;
-  }
-
-  @media (max-width: 600px) {
-    .hobby-grid {
-      grid-template-columns: 1fr; /* Force single column on very small phones */
-    }
-  }
-</style>
+        @media (max-width: 600px) {
+            .portfolio-hobby-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="site-wrapper">
-  
-  <div class="profile-header">
-    <nav class="top-nav">
-      <a href="Dashboard.html" class="btn">DASHBOARD</a>
-      <button class="btn btn-primary" onclick="toggleAbout()">ABOUT ME</button>
-    </nav>
+    <div class="portfolio-site-wrapper">
 
-    <div class="profile-image" style="background-image:url('dalendeuzzz/pfp.jpeg');"></div>
-    
-    <h1 class="name">Dhylan Gil M. Salazar</h1>
-    <span class="info-tag">Student</span>
+        <div class="portfolio-profile-header">
+            <nav class="portfolio-top-nav">
+                <a href="Dashboard.html" class="portfolio-nav-btn">DASHBOARD</a>
+                <button class="portfolio-nav-btn portfolio-nav-btn-primary" onclick="toggleAbout()">ABOUT ME</button>
+            </nav>
 
-    <div class="details-box">
-      Course & Section: <strong>Computer Science 1-A</strong><br>
-      Student ID: <strong>2511001055</strong>
+            <div class="portfolio-profile-image" style="background-image:url('dalendeuzzz/pfp.jpeg');"></div>
+
+            <h1 class="portfolio-name-title">Dhylan Gil M. Salazar</h1>
+            <span class="portfolio-info-tag">Student</span>
+
+            <div class="portfolio-details-card">
+                Course & Section: <strong>Computer Science 1-A</strong><br>
+                Student ID: <strong>2511001055</strong>
+            </div>
+        </div>
+
+        <div class="portfolio-about-section" id="aboutSection">
+
+            <p class="portfolio-bio-statement">
+                I’m Dhylan, but you can call me Dalen. I’m 18 years old and from Kalubkob, Silang, Cavite. 
+                I like to stay active whether it’s playing pickleball, lifting weights, or going on cycling rides.
+            </p>
+
+            <div class="portfolio-hobby-grid">
+
+                <a href="https://www.facebook.com/share/14XwD6P7fjg/?mibextid=wwXIfr" target="_blank" class="portfolio-hobby-item">
+                    <div class="portfolio-hobby-pic" style="background-image:url('dalendeuzzz/pickleball.jpeg');"></div>
+                    <span class="portfolio-hobby-label portfolio-external-icon">Pickleball</span>
+                </a>
+
+                <div class="portfolio-hobby-item">
+                    <div class="portfolio-hobby-pic" style="background-image:url('dalendeuzzz/gym.jpeg');"></div>
+                    <span class="portfolio-hobby-label">Gym</span>
+                </div>
+
+                <div class="portfolio-hobby-item">
+                    <div class="portfolio-hobby-pic" style="background-image:url('dalendeuzzz/cycling.jpeg');"></div>
+                    <span class="portfolio-hobby-label">Cycling</span>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="portfolio-site-footer">
+            dalendeuzzz &copy; 2026
+        </footer>
+
     </div>
-  </div>
 
-  <div class="about-section" id="aboutSection">
-    
-    <p class="statement">
-      I’m Dhylan, but you can call me Dalen. I’m 18 years old and from Kalubkob, Silang, Cavite. 
-      I like to stay active whether it’s playing pickleball, lifting weights, or going on cycling rides.
-    </p>
+    <script>
+        function toggleAbout() {
+            const section = document.getElementById("aboutSection");
+            section.classList.toggle("active");
 
-    <div class="hobby-grid">
- 
-      <a href="https://www.facebook.com/share/14XwD6P7fjg/?mibextid=wwXIfr" target="_blank" class="hobby-item">
-        <div class="hobby-pic" style="background-image:url('dalendeuzzz/pickleball.jpeg');"></div>
-        <span class="hobby-label external-icon">Pickleball</span>
-      </a>
-
-      <div class="hobby-item">
-        <div class="hobby-pic" style="background-image:url('dalendeuzzz/gym.jpeg');"></div>
-        <span class="hobby-label">Gym</span>
-      </div>
-
-      <div class="hobby-item">
-        <div class="hobby-pic" style="background-image:url('dalendeuzzz/cycling.jpeg');"></div>
-        <span class="hobby-label">Cycling</span>
-      </div>
-
-    </div>
-  </div>
-
-  <footer class="footer">
-    dalendeuzzz &copy; 2026
-  </footer>
-
-</div>
-
-<script>
-  function toggleAbout() {
-    const section = document.getElementById("aboutSection");
-    section.classList.toggle("active");
-    
-    if (section.classList.contains("active")) {
-      setTimeout(() => {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 400);
-    }
-  }
-</script>
+            if (section.classList.contains("active")) {
+                setTimeout(() => {
+                    section.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 400);
+            }
+        }
+    </script>
 
 </body>
 </html>
-
