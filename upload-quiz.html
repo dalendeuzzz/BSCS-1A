@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #7F7979;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 450px;
+            background: #3D3B3C;
+            padding: 35px;
+            border-radius: 32px;
+            border: 1px solid #e1e8ed;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #C1BDB3;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ccc;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid #ccc;
+            background: #ccc;
+            font-size: 0.9rem;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            font-size: 0.8rem;
+            color: #C1BDB3;
+            padding: 10px 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 18px;
+            background: #ccc;
+            color: #323031;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .reset-btn {
+            width: 100%;
+            background: none;
+            border: 1px solid #7F7979;
+            color: #999;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .reset-btn:hover {
+            background: #fafafa;
+            color: #3D3B3C;
+            border-color: #ccc;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: #C1BDB3;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>QUIZ SUBMISSION</h2>
+        
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="title">Quiz Title</label>
+                <input type="text" id="title" placeholder="e.g., Quiz 1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mainFile">Quiz File</label>
+                <input type="file" id="mainFile">
+            </div>
+
+            <div class="form-group">
+                <label for="proofImage">Proof Image</label>
+                <input type="file" id="proofImage" accept="image/*">
+            </div>
+
+            <button type="submit" class="submit-btn">UPLOAD TO QUIZ</button>
+            <button type="button" class="reset-btn" onclick="clearForm()">Clear Selection</button>
+        </form>
+
+        <a href="Dashboard.html" class="back-btn">← Cancel</a>
+    </div>
+
+    <script>
+        function clearForm() {
+            document.getElementById('uploadForm').reset();
+        }
+
+        document.getElementById('uploadForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const titleVal = document.getElementById('title').value;
+            const fileInput = document.getElementById('mainFile');
+            const imageInput = document.getElementById('proofImage');
+
+            if (!fileInput.files[0] && !imageInput.files[0]) {
+                alert("Please upload at least one file.");
+                return;
+            }
+
+            const reader = new FileReader();
+
+            if (imageInput.files[0]) {
+                reader.readAsDataURL(imageInput.files[0]);
+                reader.onload = function() {
+                    saveData(reader.result);
+                };
+            } else {
+                saveData(null);
+            }
+
+            function saveData(imageData) {
+                const newUpload = {
+                    type: 'Quiz',
+                    title: titleVal,
+                    fileName: fileInput.files[0] ? fileInput.files[0].name : "No document",
+                    image: imageData
+                };
+
+                const currentUploads = JSON.parse(localStorage.getItem('myUploads') || '[]');
+                currentUploads.push(newUpload);
+                localStorage.setItem('myUploads', JSON.stringify(currentUploads));
+
+                alert('Quiz Uploaded!');
+                window.location.href = 'view-submission.html';
+            }
+        };
+    </script>
+</body>
+</html>
