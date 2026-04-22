@@ -19,7 +19,7 @@
             padding: 40px 20px;
         }
 
-        .form-container {
+        .upload-form-container {
             width: 100%;
             max-width: 450px;
             background: #3D3B3C;
@@ -29,7 +29,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
         }
 
-        h2 {
+        .upload-main-title {
             font-size: 1.3rem;
             margin-bottom: 30px;
             text-align: center;
@@ -37,11 +37,11 @@
             letter-spacing: 1px;
         }
 
-        .form-group {
+        .upload-field-group {
             margin-bottom: 22px;
         }
 
-        label {
+        .upload-field-label {
             display: block;
             font-size: 0.7rem;
             font-weight: 700;
@@ -51,7 +51,7 @@
             letter-spacing: 1px;
         }
 
-        input[type="text"] {
+        .upload-input-text {
             width: 100%;
             padding: 15px;
             border-radius: 14px;
@@ -60,14 +60,14 @@
             font-size: 0.9rem;
         }
 
-        input[type="file"] {
+        .upload-input-file {
             width: 100%;
             font-size: 0.8rem;
             color: #C1BDB3;
             padding: 10px 0;
         }
 
-        .submit-btn {
+        .upload-submit-button {
             width: 100%;
             padding: 18px;
             border: none;
@@ -80,7 +80,7 @@
             font-size: 0.9rem;
         }
 
-        .reset-btn {
+        .upload-reset-button {
             width: 100%;
             background: none;
             border: 1px solid #7F7979;
@@ -95,13 +95,13 @@
             transition: 0.2s;
         }
 
-        .reset-btn:hover {
+        .upload-reset-button:hover {
             background: #fafafa;
             color: #3D3B3C;
             border-color: #ccc;
         }
 
-        .back-btn {
+        .upload-cancel-link {
             display: block;
             text-align: center;
             margin-top: 25px;
@@ -116,30 +116,30 @@
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>QUIZ SUBMISSION</h2>
+    <div class="upload-form-container">
+        <h2 class="upload-main-title">QUIZ SUBMISSION</h2>
         
         <form id="uploadForm">
-            <div class="form-group">
-                <label for="title">Quiz Title</label>
-                <input type="text" id="title" placeholder="e.g., Quiz 1" required>
+            <div class="upload-field-group">
+                <label class="upload-field-label" for="title">Quiz Title</label>
+                <input class="upload-input-text" type="text" id="title" placeholder="e.g., Quiz 1" required>
             </div>
 
-            <div class="form-group">
-                <label for="mainFile">Quiz File</label>
-                <input type="file" id="mainFile">
+            <div class="upload-field-group">
+                <label class="upload-field-label" for="mainFile">Quiz File</label>
+                <input class="upload-input-file" type="file" id="mainFile">
             </div>
 
-            <div class="form-group">
-                <label for="proofImage">Proof Image</label>
-                <input type="file" id="proofImage" accept="image/*">
+            <div class="upload-field-group">
+                <label class="upload-field-label" for="proofImage">Proof Image</label>
+                <input class="upload-input-file" type="file" id="proofImage" accept="image/*">
             </div>
 
-            <button type="submit" class="submit-btn">UPLOAD TO QUIZ</button>
-            <button type="button" class="reset-btn" onclick="clearForm()">Clear Selection</button>
+            <button type="submit" class="upload-submit-button">UPLOAD TO QUIZ</button>
+            <button type="button" class="upload-reset-button" onclick="clearForm()">Clear Selection</button>
         </form>
 
-        <a href="Dashboard.html" class="back-btn">← Cancel</a>
+        <a href="Dashboard.html" class="upload-cancel-link">← Cancel</a>
     </div>
 
     <script>
